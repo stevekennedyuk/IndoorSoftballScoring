@@ -1,0 +1,29 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "NetTek Ltd",
+    "longName": "Indoor Softball Scoring",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/ump1.png",
+                "name": "ISS_IMAGE",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Indoor Softball",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "6db89f1e-a1fd-491e-abb5-7abf6fed9e83",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
