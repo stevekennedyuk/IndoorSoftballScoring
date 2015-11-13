@@ -295,6 +295,31 @@ static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 	}
 }
 
+static void up_click_handler_multi(ClickRecognizerRef recognizer, void *context) {
+	if (iss_Paused || iss_InGame){
+		if (iss_Away){
+			iss_AwayScore[iss_Inning] += HOME_RUN;
+			if (iss_AwayScore[iss_Inning] < 0 ){
+				snprintf(iss_T_AwayScore,5,"%04d",iss_AwayScore[iss_Inning]);
+				text_layer_set_text(s_AwayScore,iss_T_AwayScore);
+			} else {
+				snprintf(iss_T_AwayScore,5," %03d",iss_AwayScore[iss_Inning]);
+				text_layer_set_text(s_AwayScore,iss_T_AwayScore);
+			}
+		}
+		else {
+			iss_HomeScore[iss_Inning] += HOME_RUN;
+			if (iss_HomeScore[iss_Inning] < 0){
+				snprintf(iss_T_HomeScore,5,"%04d",iss_HomeScore[iss_Inning]);
+				text_layer_set_text(s_HomeScore,iss_T_HomeScore);
+			} else {
+				snprintf(iss_T_HomeScore,5," %03d",iss_HomeScore[iss_Inning]);
+				text_layer_set_text(s_HomeScore,iss_T_HomeScore);
+			}
+		}
+	}
+}
+
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 	if (iss_Paused || iss_InGame){
 		if (iss_Away){
@@ -316,7 +341,31 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 				snprintf(iss_T_HomeScore,4,"%03d",iss_HomeScore[iss_Inning]);
 				text_layer_set_text(s_HomeScore,iss_T_HomeScore);
 			}
-			
+		}
+	}
+}
+
+static void down_click_handler_multi(ClickRecognizerRef recognizer, void *context) {
+	if (iss_Paused || iss_InGame){
+		if (iss_Away){
+			iss_AwayScore[iss_Inning] += CATCHER_OUT;
+			if (iss_AwayScore[iss_Inning] < 0){
+				snprintf(iss_T_AwayScore,5,"%04d",iss_AwayScore[iss_Inning]);
+				text_layer_set_text(s_AwayScore,iss_T_AwayScore);
+			} else {
+				snprintf(iss_T_AwayScore,4,"%03d",iss_AwayScore[iss_Inning]);
+				text_layer_set_text(s_AwayScore,iss_T_AwayScore);
+			}
+		}
+		else{
+			iss_HomeScore[iss_Inning] += CATCHER_OUT;
+			if (iss_HomeScore[iss_Inning] < 0){
+				snprintf(iss_T_HomeScore,5,"%04d",iss_HomeScore[iss_Inning]);
+				text_layer_set_text(s_HomeScore,iss_T_HomeScore);
+			} else {
+				snprintf(iss_T_HomeScore,4,"%03d",iss_HomeScore[iss_Inning]);
+				text_layer_set_text(s_HomeScore,iss_T_HomeScore);
+			}
 		}
 	}
 }
@@ -324,7 +373,9 @@ static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
   window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
+  window_multi_click_subscribe(BUTTON_ID_UP, 2, 0, 0, true, up_click_handler_multi);
   window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
+  window_multi_click_subscribe(BUTTON_ID_DOWN, 2, 0, 0, true, down_click_handler_multi);
 }
 
 void show_iss_windows(void) {

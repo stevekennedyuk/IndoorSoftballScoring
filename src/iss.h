@@ -4,6 +4,9 @@
 #define INNINGS_TIME 300 /* Each Inning is 5m or 300s */
 #define MAX_INNINGS 2 /* 2 innings per game */
 
+#define HOME_RUN 5 /* hitting back wall is 5 runs */
+#define CATCHER_OUT -2 /* the catcher getting an out is -2 runs */
+
 /*
  * sort of finite state machine
  */
